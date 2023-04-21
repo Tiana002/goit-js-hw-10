@@ -27,13 +27,10 @@ function onInput (evt) {
     countryListEl.innerHTML = '';
 }
 
-countryListEl.style.listStyle = 'none';
-countryListEl.style.margin = '0';
-countryListEl.style.padding = '8';
-
-
-
-
+document.body.style.background = "beige";
+document.body.style.marginLeft = "40%";
+ countryListEl.style.listStyle = 'none';
+ 
 function choseMarkup(countryArr) {
     if (countryArr.length === 1) {
         countryListEl.innerHTML = '';

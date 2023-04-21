@@ -30,6 +30,7 @@ h1 {
 .country-info_item {
   display: flex;
   align-items: center;
+  margin-bottom: 8px;
 }
 .country-info_item > p {
   margin-left: 8px;
@@ -37,8 +38,12 @@ h1 {
 .country-item {
   display: flex;
   align-items: center;
+  margin-bottom: 8px;
 }
 
 .country-item > p {
   margin-left: 8px;
+}
+.country-list {
+  padding: 0;
 }
