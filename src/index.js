@@ -12,20 +12,30 @@ const countryInfoEl = document.querySelector('.country-info');
 searchBox.addEventListener('input', debounce(onInput, DEBOUNCE_DELAY));
 
 function onInput (evt) {
+    evt.preventDefault();
     let inputCountry = evt.target.value.trim();
     if (inputCountry) {
+         countryInfoEl.innerHTML = '';
+         countryListEl.innerHTML = '';
+        
         return fetchCountries(inputCountry)
         .then(data => {
             choseMarkup(data);
         })
         .catch(error => {
-            Notify.failure('Oops, there is no country with that name');
+             countryListEl.innerHTML = '';
+            if (error.message === "404"){
+                console.log(error.message);
+                 return Notify.failure('Oops, there is no country with that name');
+            } else  
+                {
+                 return Notify.failure(error.message);      
+                }
         });
     }
     
-    countryInfoEl.innerHTML = '';
-    countryListEl.innerHTML = '';
-}
+    
+ }
 
 document.body.style.background = "beige";
 document.body.style.marginLeft = "40%";
@@ -48,7 +58,7 @@ function choseMarkup(countryArr) {
 function markupCountryItem(data) {
     const markup = data.map(el => {
         return `<li class="country-item">
-        <img src="${el.flags.svg}" alt="${el.name.official}" width="40" height="20" /> 
+        <img src="${el.flags.svg}" alt="${el.name.official}" width="60" height="40" /> 
         <p>${el.name.official}</p>
         </li>`;
     })
@@ -61,7 +71,7 @@ function markupCountry(data) {
         return `<h1>
         <img src="${el.flags.svg}" alt="${
          el.name.official
-       }" width="40" height="20" /> 
+       }" width="60" height="40" /> 
              
          ${el.name.official}
        </h1>
@@ -76,7 +86,7 @@ function markupCountry(data) {
          </li>
          <li class="country-info_item">
            <h2>Languages:</h2>
-           <p>${Object.values(el.languages).join(',')}</p>
+           <p>${Object.values(el.languages).join(', ')}</p>
          </li>
        </ul>`;
     })
